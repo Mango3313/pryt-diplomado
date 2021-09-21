@@ -15,9 +15,9 @@ export default {
     const password = bcrypt.hashSync(data.password,salt);
     const token = randomstring.generate(8).toUpperCase();
     data = {
+      ...data,
       token,
       password,
-      ...data
     };
     return ctx.prisma.createUser(data);
   },

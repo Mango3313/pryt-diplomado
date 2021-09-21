@@ -1,4 +1,4 @@
-endpoint: ${env:URL_BASE}/pyt/${env:ENVIROMENT}
+endpoint: ${env:URL_BASE}/default/${env:ENVIROMENT}
 databaseType: document
 datamodel:
   - ./models/movie.prisma

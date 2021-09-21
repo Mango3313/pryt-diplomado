@@ -1,10 +1,10 @@
-type User implements Node {
+type User {
   id: ID! @id
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
   email: String! @unique
-  password: String!
+  password: String
   name: String!
-  points: Int
   token: String @unique
+  orders: [Order!]! @relation(name: "OrdersUser", link: INLINE)
 }
