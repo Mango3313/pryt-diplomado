@@ -1,6 +1,8 @@
+import { computeExecutableSchemaId } from "apollo-server-core/dist/plugin/schemaReporting";
 import * as bcrypt from "bcryptjs";
 import * as randomstring from "randomstring";
-import { UserCreateInput } from "../../generated/prisma-client"
+import { createGzip } from "zlib";
+import { UserCreateInput, UserWhereUniqueInput } from "../../generated/prisma-client"
 import { Context } from "../../utils";
 
 export default {
@@ -21,4 +23,5 @@ export default {
     };
     return ctx.prisma.createUser(data);
   },
+  deleteUser: (parent,args:{where: UserWhereUniqueInput},ctx: Context) => ctx.prisma.deleteUser({id:args.where.id}),
 };

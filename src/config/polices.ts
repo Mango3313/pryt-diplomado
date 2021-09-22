@@ -15,3 +15,15 @@ export const isAuthenticated = rule({ cache: "contextual" })(
     return true;
   }
 );
+export const hasAuthorization = rule({cache:"contextual"})(
+  async (parent, args, ctx, info) =>{
+    const user = await getUser(ctx);
+    if (user.role) {
+      return new ApolloError(
+        "user not loged",
+        "ERR_NOT_LOGED"
+      );
+    }
+    return true;
+  }
+);

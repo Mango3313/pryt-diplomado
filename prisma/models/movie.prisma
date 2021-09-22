@@ -3,4 +3,12 @@ type Movie {
     name: String!
     duration: Int!
     year: DateTime!
+    rate: Ratings!
+}
+
+enum Ratings {
+    A
+    B
+    C
+    R
 }

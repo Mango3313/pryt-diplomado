@@ -9,7 +9,9 @@ export const permissions = shield(
       "*": allow,
     },
     Mutation: {
-      "*": allow,
+      login: allow,
+      createUser: allow,
+      "*":isAuthenticated
     },
     Subscription: {
       "*": allow,

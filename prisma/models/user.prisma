@@ -6,5 +6,6 @@ type User {
   password: String
   name: String!
   token: String @unique
+  role: [String] 
   orders: [Order!]! @relation(name: "OrdersUser", link: INLINE)
 }
