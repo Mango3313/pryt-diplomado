@@ -1,5 +1,7 @@
 FROM node:14-alpine
 
+RUN npm i prisma1
+
 RUN mkdir -p /home/app/node && chown node /home/app/node
 
 USER node
@@ -8,12 +10,12 @@ WORKDIR /home/app/node
 
 COPY package.json ${WORKDIR}
 
-RUN yarn install
+RUN npm install
 
 COPY . ${WORKDIR}
 
-ENV HOST=0.0.0.0 PORT=3000
+ENV HOST=0.0.0.0 PORT=4000
 
 EXPOSE ${PORT}
 
-CMD ["yarn", "start"]
+CMD [ "npm", "run", "deploy" ]
