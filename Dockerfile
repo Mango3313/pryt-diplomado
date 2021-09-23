@@ -1,6 +1,6 @@
 FROM node:14-alpine
 
-RUN npm i prisma1
+RUN npm install prisma1
 
 RUN mkdir -p /home/app/node && chown node /home/app/node
 
