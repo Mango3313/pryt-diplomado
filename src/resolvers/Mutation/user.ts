@@ -1,7 +1,5 @@
-import { computeExecutableSchemaId } from "apollo-server-core/dist/plugin/schemaReporting";
 import * as bcrypt from "bcryptjs";
 import * as randomstring from "randomstring";
-import { createGzip } from "zlib";
 import { UserCreateInput, UserWhereUniqueInput } from "../../generated/prisma-client"
 import { Context } from "../../utils";
 

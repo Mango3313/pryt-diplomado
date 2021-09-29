@@ -3,14 +3,14 @@ services:
   prisma:
     image: prismagraphql/prisma:1.34
     restart: always
-    command: 'prisma1 deploy --force'
     depends_on: 
       - mongo
     links: 
       - mongo
-    hostname: prisma
     ports:
       - 4466:4466
+    networks:
+      - prisma
     environment:
       PRISMA_CONFIG: |
         port: 4466
@@ -23,13 +23,14 @@ services:
   mongo:
     image: mongo:3.6
     restart: always
+    networks:
+      - prisma
     # Uncomment the next two lines to connect to your your database from outside the Docker environment, e.g. using a database GUI like Compass
     # ports:
     # - "27017:27017"
     environment:
       MONGO_INITDB_ROOT_USERNAME: prisma
       MONGO_INITDB_ROOT_PASSWORD: prisma
-    hostname: mongo
     ports:
       - 27017:27017
     volumes:
@@ -37,12 +38,14 @@ services:
   app:
     container_name: diplo
     image: diplo/app
+    networks:
+      - prisma
     environment:
       - NODE_ENV=development
-      - URL_BASE=http://prisma
+      - URL_BASE=http://prisma:4466
       - ENVIROMENT=development 
-      - PRISMA_SECRET=pikachi
-      - APP_SECRET=pikachi
+      - PRISMA_SECRET=secret123
+      - APP_SECRET=secret123
     build:
       context: .
       #dockerfile: Dockerfile.dev
@@ -51,6 +54,10 @@ services:
     links: 
       - prisma
     ports:
-      - 4004:4000
+      - 4000:4000
+networks:
+  prisma:
+    driver: bridge
+
 volumes:
   mongo:
